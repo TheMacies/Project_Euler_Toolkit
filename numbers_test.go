@@ -36,5 +36,13 @@ func TestNPandigital(t *testing.T) {
 	if !NPandigital(324196578, 9) {
 		t.Fail()
 	}
+}
 
+func TestConcatNumbers(t *testing.T) {
+	if ConcatNumbers(2, 3, 4, 5) != 2345 {
+		t.Fail()
+	}
+	if ConcatNumbers(0, 2, 0, 2) != 202 {
+		t.Fail()
+	}
 }

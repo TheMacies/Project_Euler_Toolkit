@@ -1,5 +1,7 @@
 package kit
 
+import "math"
+
 // CountDigits  of an integer
 func CountDigits(number int) int {
 	if number == 0 {
@@ -39,4 +41,15 @@ func NPandigital(number, n int) bool {
 		}
 	}
 	return true
+}
+
+//ConcatNumbers specified in args into one big number
+func ConcatNumbers(nums ...int) int {
+	number := 0
+	for i := range nums {
+		digs := CountDigits(nums[i])
+		number *= int(math.Pow10(digs))
+		number += nums[i]
+	}
+	return number
 }
