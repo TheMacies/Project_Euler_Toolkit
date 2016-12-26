@@ -19,6 +19,22 @@ func CountDigits(number int) int {
 	return digits
 }
 
+//GetFactors returns counted factors of a number
+func GetFactors(number int) []int {
+	factors := make([]int, number+1)
+	for i := 2; i <= number; i++ {
+		if number <= 1 {
+			break
+		}
+		if number%i == 0 {
+			factors[i]++
+			number /= i
+			i = 1
+		}
+	}
+	return factors
+}
+
 //NPandigital checks if given number is n-pandigital
 func NPandigital(number, n int) bool {
 	digits := CountDigits(number)
@@ -52,4 +68,74 @@ func ConcatNumbers(nums ...int) int {
 		number += nums[i]
 	}
 	return number
+}
+
+//GeneratePrimesLookup generates a  n-length table such that i-th elem is true if i is prime number
+func GeneratePrimesLookup(n int) []bool {
+	primesLookup := make([]bool, n)
+	numberCheck := make([]bool, n)
+
+	for i := 2; i < n; i++ {
+		if !numberCheck[i] {
+			primesLookup[i] = true
+			for j := i; j < n; j += i {
+				numberCheck[j] = true
+			}
+		}
+	}
+	return primesLookup
+}
+
+//NumberToArray converts number to an array
+func NumberToArray(num int) []int {
+	var comb []int
+	if num == 0 {
+		comb = append(comb, 0)
+		return comb
+	}
+	for num > 0 {
+		comb = append(comb, num%10)
+		num = num / 10
+	}
+	return comb
+}
+
+func ArrayToNumber(comb []int) int {
+	sum := 0
+	multiplier := 1
+	for i := range comb {
+		sum += multiplier * comb[len(comb)-1-i]
+		multiplier *= 10
+	}
+	return sum
+}
+
+//GeneratePermutations generates all permutations of given array
+func GeneratePermutations(elems []int) [][]int {
+	perms := make([][]int, 1)
+	perms[0] = make([]int, len(elems))
+	neutralNumber := 0
+	for _, val := range elems {
+		if neutralNumber >= val {
+			neutralNumber = val - 1
+		}
+	}
+	for i := range perms[0] {
+		perms[0][i] = neutralNumber
+	}
+	for i := range elems {
+		tempCombs := perms
+		perms = make([][]int, 0)
+		for j := range tempCombs {
+			for k := 0; k < len(elems); k++ {
+				tempComb := make([]int, len(elems))
+				copy(tempComb, tempCombs[j])
+				if tempComb[k] == neutralNumber {
+					tempComb[k] = elems[i]
+					perms = append(perms, tempComb)
+				}
+			}
+		}
+	}
+	return perms
 }
