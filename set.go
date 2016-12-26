@@ -6,6 +6,10 @@ type Set struct {
 	comparingFunction func(interface{}, interface{}) int
 }
 
+func (s *Set) GetElems() []interface{} {
+	return s.elements
+}
+
 func InitializeSet(f func(interface{}, interface{}) int) Set {
 	var s Set
 	s.comparingFunction = f
