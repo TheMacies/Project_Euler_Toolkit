@@ -3,5 +3,8 @@ In here shall be a set of tools that make it easier to complete Project Euler ch
 Descirption :
 
 # Numbers :
+1. Counting digits
+2. Checking if number is n-pandigital
+
 
 # Strings :
