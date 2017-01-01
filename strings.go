@@ -8,3 +8,11 @@ func IsPalindrome(st string) bool {
 	}
 	return true
 }
+
+func ReverseString(st string) string {
+	var a string
+	for i := range st {
+		a += string(st[len(st)-1-i])
+	}
+	return a
+}
