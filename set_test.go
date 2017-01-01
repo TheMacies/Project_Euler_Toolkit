@@ -104,3 +104,18 @@ func TestContains(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestGetElems(t *testing.T) {
+	s := InitializeSet(DefaultIntComparingFuncion)
+	s.Insert(2)
+	s.Insert(4)
+	a := s.GetElems()
+	val := a[0].(int)
+	if val != 4 {
+		t.Fail()
+	}
+	val = a[1].(int)
+	if val != 2 {
+		t.Fail()
+	}
+}

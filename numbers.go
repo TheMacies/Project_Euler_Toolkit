@@ -23,9 +23,6 @@ func CountDigits(number int) int {
 func GetFactors(number int) []int {
 	factors := make([]int, number+1)
 	for i := 2; i <= number; i++ {
-		if number <= 1 {
-			break
-		}
 		if number%i == 0 {
 			factors[i]++
 			number /= i
@@ -114,7 +111,7 @@ func ArrayToNumber(comb []int) int {
 	sum := 0
 	multiplier := 1
 	for i := range comb {
-		sum += multiplier * comb[len(comb)-1-i]
+		sum += multiplier * comb[i]
 		multiplier *= 10
 	}
 	return sum

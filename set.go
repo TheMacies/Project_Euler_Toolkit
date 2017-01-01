@@ -83,14 +83,8 @@ func (s *Set) Contains(el interface{}) bool {
 }
 
 func DefaultIntComparingFuncion(a, b interface{}) int {
-	aInt, ok := a.(int)
-	if !ok {
-		panic("Comparing bad types - a")
-	}
-	bInt, ok := b.(int)
-	if !ok {
-		panic("Comparing bad types - b")
-	}
+	aInt := a.(int)
+	bInt := b.(int)
 	c := bInt - aInt
 	if c == 0 {
 		return c
@@ -102,14 +96,8 @@ func DefaultIntComparingFuncion(a, b interface{}) int {
 }
 
 func DefaultStringComparingFuncion(a, b interface{}) int {
-	aString, ok := a.(string)
-	if !ok {
-		panic("Comparing bad types - a")
-	}
-	bString, ok := b.(string)
-	if !ok {
-		panic("Comparing bad types - b")
-	}
+	aString := a.(string)
+	bString := b.(string)
 
 	if aString > bString {
 		return 1
@@ -121,14 +109,9 @@ func DefaultStringComparingFuncion(a, b interface{}) int {
 }
 
 func DefaultByteComparingFuncion(a, b interface{}) int {
-	aByte, ok := a.(byte)
-	if !ok {
-		panic("Comparing bad types - a")
-	}
-	bByte, ok := b.(byte)
-	if !ok {
-		panic("Comparing bad types - b")
-	}
+	aByte := a.(byte)
+	bByte := b.(byte)
+
 	if aByte > bByte {
 		return 1
 	}
