@@ -146,3 +146,22 @@ func GeneratePermutations(elems []int) [][]int {
 	}
 	return perms
 }
+
+func GeneratePowerSet(numbers []int) [][]int {
+	var res [][]int
+	if len(numbers) == 1 {
+		a := make([]int, 1)
+		var b []int
+		a[0] = numbers[0]
+		res = append(res, a)
+		res = append(res, b)
+		return res
+	}
+	number := numbers[0]
+	s1 := GeneratePowerSet(numbers[1:])
+	s2 := GeneratePowerSet(numbers[1:])
+	for i := range s1 {
+		s1[i] = append(s1[i], number)
+	}
+	return append(s1, s2...)
+}

@@ -144,3 +144,14 @@ func TestGetFactors(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestGeneratePowerSet(t *testing.T) {
+	a := []int{1, 2, 3}
+	if len(GeneratePowerSet(a)) != 8 {
+		t.Fail()
+	}
+	a = append(a, 4)
+	if len(GeneratePowerSet(a)) != 16 {
+		t.Fail()
+	}
+}
