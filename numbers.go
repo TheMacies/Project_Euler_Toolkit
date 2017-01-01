@@ -86,6 +86,16 @@ func GeneratePrimesLookup(n int) []bool {
 	return primesLookup
 }
 
+func ReverseNumber(num int) int {
+	a := 0
+	for num != 0 {
+		a *= 10
+		a += num % 10
+		num /= 10
+	}
+	return a
+}
+
 //NumberToArray converts number to an array
 func NumberToArray(num int) []int {
 	var comb []int
