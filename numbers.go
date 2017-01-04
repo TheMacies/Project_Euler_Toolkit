@@ -165,3 +165,14 @@ func GeneratePowerSet(numbers []int) [][]int {
 	}
 	return append(s1, s2...)
 }
+
+func HCF(a, b int) int {
+	for a != b {
+		if a > b {
+			a = a - b
+		} else {
+			b = b - a
+		}
+	}
+	return a
+}

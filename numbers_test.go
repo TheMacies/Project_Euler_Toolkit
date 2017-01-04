@@ -155,3 +155,18 @@ func TestGeneratePowerSet(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestHWC(t *testing.T) {
+	if HWC(1, 3) != 1 {
+		t.Fail()
+	}
+	if HWC(2, 4) != 2 {
+		t.Fail()
+	}
+	if HWC(8, 48) != 8 {
+		t.Fail()
+	}
+	if HWC(144, 60) != 12 {
+		t.Fail()
+	}
+}
