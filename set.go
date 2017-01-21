@@ -85,11 +85,10 @@ func (s *Set) Contains(el interface{}) bool {
 func DefaultIntComparingFuncion(a, b interface{}) int {
 	aInt := a.(int)
 	bInt := b.(int)
-	c := bInt - aInt
-	if c == 0 {
-		return c
+	if aInt == bInt {
+		return 0
 	}
-	if c > 0 {
+	if aInt > bInt {
 		return 1
 	}
 	return -1
