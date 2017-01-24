@@ -74,20 +74,23 @@ func TestDirectedGraphDijkstra(t *testing.T) {
 	g.AddEdge(2, 4, 2)
 	g.AddEdge(3, 4, 5)
 
-	if l, _ := g.Dijkstra(0, 1); l != 3 {
+	if l, _ := g.Dijkstra(0); l[1] != 3 {
 		t.Fail()
 	}
-	if l, _ := g.Dijkstra(0, 4); l != 6 {
-		t.Fail()
-	}
-	if l, _ := g.Dijkstra(1, 2); l != 1 {
-		t.Fail()
-	}
-	if _, err := g.Dijkstra(4, -1); err == nil {
+	if l, _ := g.Dijkstra(0); l[4] != 6 {
+
 		t.Fail()
 	}
 
-	if _, err := g.Dijkstra(4, 6); err == nil {
+	if l, _ := g.Dijkstra(1); l[2] != 1 {
+		t.Fail()
+	}
+
+	if _, err := g.Dijkstra(-1); err == nil {
+		t.Fail()
+	}
+
+	if _, err := g.Dijkstra(5); err == nil {
 		t.Fail()
 	}
 

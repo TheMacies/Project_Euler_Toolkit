@@ -203,18 +203,18 @@ func (g *directedGraph) GetWeight(vertex1, vertex2 int) (int, error) {
 	return 0, errors.New("Edge does not exist")
 }
 
-func (g *directedGraph) Dijkstra(vertex1, vertex2 int) (int, error) {
+func (g *directedGraph) Dijkstra(vertex1 int) ([]int, error) {
 	type visited struct {
 		dist    int
 		visited bool
 	}
 
-	if vertex1 < 0 || vertex2 < 0 {
-		return 0, errors.New("Bad vertex number ( numbers are >= 0 )")
+	if vertex1 < 0 {
+		return nil, errors.New("Bad vertex number ( numbers are >= 0 )")
 	}
 
-	if l := len(g.vertices); l <= vertex1 || l <= vertex2 {
-		return 0, errors.New("Vertex does not exist")
+	if l := len(g.vertices); l <= vertex1 {
+		return nil, errors.New("Vertex does not exist")
 	}
 
 	v := make([]visited, len(g.vertices))
@@ -245,5 +245,9 @@ func (g *directedGraph) Dijkstra(vertex1, vertex2 int) (int, error) {
 			}
 		}
 	}
-	return v[vertex2].dist, nil
+	lengths := make([]int, len(g.vertices))
+	for i := range v {
+		lengths[i] = v[i].dist
+	}
+	return lengths, nil
 }
