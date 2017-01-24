@@ -60,6 +60,39 @@ func TestDirectedGraph(t *testing.T) {
 	g.RemoveEdge(2, 3)
 }
 
+func TestDirectedGraphDijkstra(t *testing.T) {
+	g := NewDirectedGraph()
+	for i := 0; i < 5; i++ {
+		g.AddVertex()
+	}
+
+	g.AddEdge(0, 1, 3)
+	g.AddEdge(0, 2, 5)
+	g.AddEdge(1, 2, 1)
+	g.AddEdge(1, 3, 2)
+	g.AddEdge(1, 4, 8)
+	g.AddEdge(2, 4, 2)
+	g.AddEdge(3, 4, 5)
+
+	if l, _ := g.Dijkstra(0, 1); l != 3 {
+		t.Fail()
+	}
+	if l, _ := g.Dijkstra(0, 4); l != 6 {
+		t.Fail()
+	}
+	if l, _ := g.Dijkstra(1, 2); l != 1 {
+		t.Fail()
+	}
+	if _, err := g.Dijkstra(4, -1); err == nil {
+		t.Fail()
+	}
+
+	if _, err := g.Dijkstra(4, 6); err == nil {
+		t.Fail()
+	}
+
+}
+
 func TestUndirectedGraph(t *testing.T) {
 	g := NewUndirectedGraph()
 

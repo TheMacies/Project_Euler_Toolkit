@@ -1,6 +1,9 @@
 package kit
 
-import "errors"
+import (
+	"errors"
+	"math"
+)
 
 type edge struct {
 	weight         int
@@ -44,6 +47,7 @@ func (g *undirectedGraph) RemoveVertex(number int) error {
 		g.RemoveEdge(number, edge.adjacentVertex)
 		g.RemoveEdge(edge.adjacentVertex, number)
 	}
+
 	g.vertices = append(g.vertices[:number], g.vertices[number+1:]...)
 	return nil
 }
@@ -197,4 +201,49 @@ func (g *directedGraph) GetWeight(vertex1, vertex2 int) (int, error) {
 		}
 	}
 	return 0, errors.New("Edge does not exist")
+}
+
+func (g *directedGraph) Dijkstra(vertex1, vertex2 int) (int, error) {
+	type visited struct {
+		dist    int
+		visited bool
+	}
+
+	if vertex1 < 0 || vertex2 < 0 {
+		return 0, errors.New("Bad vertex number ( numbers are >= 0 )")
+	}
+
+	if l := len(g.vertices); l <= vertex1 || l <= vertex2 {
+		return 0, errors.New("Vertex does not exist")
+	}
+
+	v := make([]visited, len(g.vertices))
+	verticesLeft := len(g.vertices)
+
+	for i := range g.vertices {
+		if i == vertex1 {
+			v[i] = visited{0, false}
+		} else {
+			v[i] = visited{math.MaxInt32, false}
+		}
+	}
+
+	for verticesLeft > 0 {
+		var indClosest int
+		closeness := math.MaxInt32
+		for i := 0; i < len(g.vertices); i++ {
+			if !v[i].visited && v[i].dist <= closeness {
+				closeness = v[i].dist
+				indClosest = i
+			}
+		}
+		v[indClosest].visited = true
+		verticesLeft--
+		for _, edge := range g.vertices[indClosest].edges {
+			if alt := edge.weight + v[indClosest].dist; !v[edge.adjacentVertex].visited && alt < v[edge.adjacentVertex].dist {
+				v[edge.adjacentVertex].dist = alt
+			}
+		}
+	}
+	return v[vertex2].dist, nil
 }
