@@ -1,6 +1,6 @@
 package kit
 
-//PriorityQueue is implemented as a biparental heap
+//PriorityQueue is implemented as a heap
 type PriorityQueue struct {
 	nodes             []interface{}
 	comparingFunction func(interface{}, interface{}) int
