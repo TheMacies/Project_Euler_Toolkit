@@ -19,5 +19,11 @@ Descirption :
 1. Checking if string is a palindrome
 2. Reversing string
 
+# Graphs :
+
+1. Un/Directed Graph implementation
+2. Dijkstra
+
 # Other :
 1. Set implementation
+2. Priority Queue implementation
